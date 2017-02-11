@@ -1,9 +1,10 @@
 dependencies {
+    compile project(':external_service')
+    compile project(':external_service_adapter')
+    compile project(':controller')
+    compile project(':usecase')
     compile project(':entity')
     compile project(':persistence')
     compile project(':persistence_adapter')
-    compile('org.springframework.boot:spring-boot-starter')
     compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile group: 'junit', name: 'junit', version: '4.11'
 }

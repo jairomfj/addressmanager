@@ -3,4 +3,8 @@ include 'entity'
 include 'persistence'
 include 'persistence_adapter'
 include 'config'
+include 'usecase'
+include 'controller'
+include 'external_service_adapter'
+include 'external_service'
 
