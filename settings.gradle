@@ -1,0 +1,6 @@
+rootProject.name = 'addressmanager'
+include 'entity'
+include 'persistence'
+include 'persistence_adapter'
+include 'config'
+
