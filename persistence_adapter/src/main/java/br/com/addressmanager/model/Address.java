@@ -93,6 +93,7 @@ public class Address {
                 && StringUtils.isNotBlank(cep)
                 && StringUtils.isNotBlank(city)
                 && StringUtils.isNotBlank(state)
-                && number != null;
+                && number != null
+                && userId != null;
     }
 }

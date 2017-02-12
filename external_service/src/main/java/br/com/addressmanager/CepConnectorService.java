@@ -38,13 +38,13 @@ public class CepConnectorService implements CepServiceAdapter {
         CepServiceResponse cepServiceResponse = new CepServiceResponse();
         if(httpResponse.isSuccess()) {
             try {
-                cepServiceResponse.setExecuted(true);
                 String responseBody = httpResponse.getBody();
                 if(StringUtils.isNotBlank(responseBody)) {
                     CepAddressResponse cepAddressResponse = new Gson().fromJson(responseBody, CepAddressResponse.class);
                     CepAddress cepAddress = parseToCepAddress(cepAddressResponse.getEndereco());
                     cepServiceResponse.setAddress(cepAddress);
                 }
+                cepServiceResponse.setExecuted(true);
             } catch (Throwable e) {
                 LOGGER.error("An error has occurred", e);
             }
