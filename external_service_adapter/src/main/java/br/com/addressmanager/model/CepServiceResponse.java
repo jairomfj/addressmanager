@@ -2,10 +2,10 @@ package br.com.addressmanager.model;
 
 public class CepServiceResponse {
 
-    private boolean executed;
-    private Address address;
+    private boolean executed = false;
+    private CepAddress address;
 
-    public boolean isExecuted() {
+    public boolean executedSuccessfully() {
         return executed;
     }
 
@@ -13,11 +13,11 @@ public class CepServiceResponse {
         this.executed = executed;
     }
 
-    public Address getAddress() {
+    public CepAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(CepAddress address) {
         this.address = address;
     }
 }

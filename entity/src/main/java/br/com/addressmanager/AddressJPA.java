@@ -1,23 +1,23 @@
 package br.com.addressmanager;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "address")
 public class AddressJPA {
 
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "street", nullable = false)
     private String street;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
     @Column(name = "number", nullable = false)
-    private String number;
+    private Long number;
 
     @Column(name = "cep", nullable = false)
     private String cep;
@@ -52,11 +52,11 @@ public class AddressJPA {
         this.street = street;
     }
 
-    public String getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
@@ -98,5 +98,13 @@ public class AddressJPA {
 
     public void setComplement(String complement) {
         this.complement = complement;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

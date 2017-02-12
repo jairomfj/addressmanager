@@ -1,10 +1,13 @@
 package br.com.addressmanager.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Address {
 
     private Long id;
     private String street;
-    private String number;
+    private Long userId;
+    private Long number;
     private String cep;
     private String city;
     private String state;
@@ -12,6 +15,14 @@ public class Address {
     private String complement;
 
     public Address() {}
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getStreet() {
         return street;
@@ -21,11 +32,11 @@ public class Address {
         this.street = street;
     }
 
-    public String getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
@@ -75,5 +86,13 @@ public class Address {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(street)
+                && StringUtils.isNotBlank(cep)
+                && StringUtils.isNotBlank(city)
+                && StringUtils.isNotBlank(state)
+                && number != null;
     }
 }

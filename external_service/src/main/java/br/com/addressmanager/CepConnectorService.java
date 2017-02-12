@@ -3,10 +3,11 @@ package br.com.addressmanager;
 import br.com.addressmanager.http.HttpConnector;
 import br.com.addressmanager.http.vo.HttpRequest;
 import br.com.addressmanager.http.vo.HttpResponse;
-import br.com.addressmanager.model.Address;
-import br.com.addressmanager.model.CepConnectorRequest;
-import br.com.addressmanager.model.CepServiceResponse;
+import br.com.addressmanager.model.*;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class CepConnectorService implements CepServiceAdapter {
 
-    @Value("cepservice.endpoint")
+    private static Logger LOGGER = LoggerFactory.getLogger(CepConnectorService.class);
+
+    @Value("${cepservice.endpoint}")
     private String endpoint;
 
     private final HttpConnector httpConnector;
@@ -25,7 +28,7 @@ public class CepConnectorService implements CepServiceAdapter {
     }
 
     @Override
-    public CepServiceResponse execute(CepConnectorRequest cepConnectorRequest) {
+    public CepServiceResponse execute(CepServiceRequest cepConnectorRequest) {
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.setUrl(endpoint);
         httpRequest.setBody(new Gson().toJson(cepConnectorRequest));
@@ -34,9 +37,29 @@ public class CepConnectorService implements CepServiceAdapter {
 
         CepServiceResponse cepServiceResponse = new CepServiceResponse();
         if(httpResponse.isSuccess()) {
-            cepServiceResponse.setAddress(new Gson().fromJson(httpResponse.getBody(), Address.class));
+            try {
+                cepServiceResponse.setExecuted(true);
+                String responseBody = httpResponse.getBody();
+                if(StringUtils.isNotBlank(responseBody)) {
+                    CepAddressResponse cepAddressResponse = new Gson().fromJson(responseBody, CepAddressResponse.class);
+                    CepAddress cepAddress = parseToCepAddress(cepAddressResponse.getEndereco());
+                    cepServiceResponse.setAddress(cepAddress);
+                }
+            } catch (Throwable e) {
+                LOGGER.error("An error has occurred", e);
+            }
         }
 
         return cepServiceResponse;
+    }
+
+    private CepAddress parseToCepAddress(Endereco endereco) {
+        CepAddress cepAddress = new CepAddress();
+        cepAddress.setCep(endereco.getCep());
+        cepAddress.setCity(endereco.getCidade());
+        cepAddress.setNeighborhood(endereco.getBairro());
+        cepAddress.setState(endereco.getEstado());
+        cepAddress.setStreet(endereco.getRua());
+        return cepAddress;
     }
 }

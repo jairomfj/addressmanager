@@ -10,6 +10,7 @@ public class AddressBuilder {
         address.setId(addressJPA.getId());
         address.setCep(addressJPA.getCep());
         address.setCity(addressJPA.getCity());
+        address.setUserId(addressJPA.getUserId());
         address.setComplement(addressJPA.getComplement());
         address.setNeighborhood(addressJPA.getNeighborhood());
         address.setNumber(addressJPA.getNumber());
@@ -22,6 +23,7 @@ public class AddressBuilder {
         address.setId(addressJPA.getId());
         address.setCep(addressJPA.getCep());
         address.setCity(addressJPA.getCity());
+        address.setUserId(addressJPA.getUserId());
         address.setComplement(addressJPA.getComplement());
         address.setNeighborhood(addressJPA.getNeighborhood());
         address.setNumber(addressJPA.getNumber());

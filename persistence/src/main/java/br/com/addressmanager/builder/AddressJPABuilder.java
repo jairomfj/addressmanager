@@ -15,6 +15,7 @@ public class AddressJPABuilder {
         addressJPA.setNumber(address.getNumber());
         addressJPA.setState(address.getState());
         addressJPA.setStreet(address.getStreet());
+        addressJPA.setUserId(address.getUserId());
         return addressJPA;
     }
 }

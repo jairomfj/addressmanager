@@ -1,6 +1,6 @@
 package br.com.addressmanager.model;
 
-public class Address {
+public class CepAddress {
     private String street;
     private String cep;
     private String city;
