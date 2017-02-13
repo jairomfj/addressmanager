@@ -28,6 +28,17 @@ public class Address {
         this.complement = complement;
     }
 
+    public Address(String street, Long userId, Long number, String cep, String city, String state, String neighborhood, String complement) {
+        this.street = street;
+        this.userId = userId;
+        this.number = number;
+        this.cep = cep;
+        this.city = city;
+        this.state = state;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+    }
+
     public Long getUserId() {
         return userId;
     }
