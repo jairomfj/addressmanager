@@ -4,9 +4,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddressCompator {
+public class AddressComparator {
 
     public boolean isEquals(Address address, CepAddress cepAddress) {
+        if(address == null || cepAddress == null) {
+            throw new IllegalArgumentException("Cannot compare null argument");
+        }
+
         return compare(address.getCep(), cepAddress.getCep())
                 && compare(address.getCity(), cepAddress.getCity())
                 && compare(address.getNeighborhood(), cepAddress.getNeighborhood())

@@ -1,7 +1,7 @@
 package br.com.addressmanager;
 
 import br.com.addressmanager.model.Address;
-import br.com.addressmanager.model.AddressCompator;
+import br.com.addressmanager.model.AddressComparator;
 import br.com.addressmanager.model.CepServiceRequest;
 import br.com.addressmanager.model.CepServiceResponse;
 import org.slf4j.Logger;
@@ -19,12 +19,12 @@ public class AddressService {
 
     private final CepServiceAdapter cepServiceAdapter;
     private final AddressPersistenceAdapter addressPersistenceAdapter;
-    private final AddressCompator addressCompator;
+    private final AddressComparator addressCompator;
 
     @Autowired
     public AddressService(CepServiceAdapter cepServiceAdapter,
                           AddressPersistenceAdapter addressPersistenceAdapter,
-                          AddressCompator addressCompator) {
+                          AddressComparator addressCompator) {
         this.cepServiceAdapter = cepServiceAdapter;
         this.addressPersistenceAdapter = addressPersistenceAdapter;
         this.addressCompator = addressCompator;

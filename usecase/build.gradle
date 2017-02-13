@@ -1,7 +1,8 @@
-
 dependencies {
     compile project(':external_service_adapter')
     compile project(':persistence_adapter')
     compile('org.springframework.boot:spring-boot-starter')
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

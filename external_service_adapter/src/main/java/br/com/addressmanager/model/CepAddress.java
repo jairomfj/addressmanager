@@ -7,6 +7,17 @@ public class CepAddress {
     private String state;
     private String neighborhood;
 
+    public CepAddress() {
+    }
+
+    public CepAddress(String street, String cep, String city, String state, String neighborhood) {
+        this.street = street;
+        this.cep = cep;
+        this.city = city;
+        this.state = state;
+        this.neighborhood = neighborhood;
+    }
+
     public String getStreet() {
         return street;
     }
