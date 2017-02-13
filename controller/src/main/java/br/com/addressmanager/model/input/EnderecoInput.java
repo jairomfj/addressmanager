@@ -1,4 +1,4 @@
-package br.com.addressmanager.model;
+package br.com.addressmanager.model.input;
 
 public class EnderecoInput {
 

@@ -7,7 +7,9 @@ import br.com.addressmanager.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AddressRepository implements AddressPersistenceAdapter {
@@ -53,10 +55,19 @@ public class AddressRepository implements AddressPersistenceAdapter {
     }
 
     @Override
-    public void delete(Address address) {
-        AddressJPA addressJPA = this.addressRepositoryJPA.findOne(address.getId());
+    public void delete(Long addressId) {
+        AddressJPA addressJPA = this.addressRepositoryJPA.findOne(addressId);
         if(addressJPA != null) {
             this.addressRepositoryJPA.delete(addressJPA);
         }
+    }
+
+    @Override
+    public List<Address> findAllByUserId(Long userId) {
+        List<AddressJPA> addressJPAList = this.addressRepositoryJPA.findAllByUserId(userId);
+        return addressJPAList
+                .stream()
+                .map(AddressBuilder::build)
+                .collect(Collectors.toList());
     }
 }
