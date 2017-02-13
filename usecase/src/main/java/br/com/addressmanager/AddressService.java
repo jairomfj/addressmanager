@@ -36,16 +36,7 @@ public class AddressService {
         }
 
         LOGGER.info("Creating new address for user: " + address.getUserId());
-        CepServiceResponse cepServiceResponse = cepServiceAdapter.execute(new CepServiceRequest(address.getCep()));
-
-        if (!cepServiceResponse.executedSuccessfully()) {
-            throw new InternalError("Could not validate cep");
-        }
-
-        if(!addressCompator.isEquals(address, cepServiceResponse.getAddress())) {
-            throw new IllegalArgumentException("Address does not correspond to the CEP's address");
-        }
-
+        validateCEPAddress(address);
         addressPersistenceAdapter.save(address);
         return address;
     }
@@ -65,6 +56,7 @@ public class AddressService {
         }
 
         LOGGER.info("Updating address id: " + address.getId());
+        validateCEPAddress(address);
         addressPersistenceAdapter.update(address);
     }
 
@@ -89,5 +81,19 @@ public class AddressService {
 
         LOGGER.info("Getting addresses from userId: " + userId);
         return addressPersistenceAdapter.findAllByUserId(userId);
+    }
+
+    private void validateCEPAddress(Address address) {
+        LOGGER.info("Validating CEP address: " + address.getCep());
+
+        CepServiceResponse cepServiceResponse = cepServiceAdapter.execute(new CepServiceRequest(address.getCep()));
+        if (!cepServiceResponse.executedSuccessfully()) {
+            throw new InternalError("Could not validate cep");
+        }
+
+        if(!addressCompator.isEquals(address, cepServiceResponse.getAddress())) {
+            throw new IllegalArgumentException("Address does not correspond to the CEP's address");
+        }
+
     }
 }

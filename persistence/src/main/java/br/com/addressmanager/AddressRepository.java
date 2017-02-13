@@ -50,8 +50,8 @@ public class AddressRepository implements AddressPersistenceAdapter {
             throw new IllegalArgumentException("Could not find persisted address for id: " + address.getId());
         }
 
+        AddressBuilder.mergeAddressToAddressJPA(address, addressJPA);
         this.addressRepositoryJPA.save(addressJPA);
-        AddressBuilder.merge(address, addressJPA);
     }
 
     @Override

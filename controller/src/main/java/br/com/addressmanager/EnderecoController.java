@@ -44,7 +44,7 @@ public class EnderecoController {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/endereco/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/endereco/{enderecoId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EnderecoOutput> delete(@PathVariable Long enderecoId) {
 
         ResponseEntity<EnderecoOutput> responseEntity;
