@@ -5,6 +5,9 @@ public class CepServiceResponse {
     private boolean executed = false;
     private CepAddress address;
 
+    public CepServiceResponse() {
+    }
+
     public CepServiceResponse(boolean executed, CepAddress address) {
         this.executed = executed;
         this.address = address;

@@ -45,11 +45,14 @@ public class AddressPersistenceAdapterBuilder {
 
             @Override
             public void delete(Long id) {
-                addressList.forEach(address -> {
-                    if(address.getId().equals(id)) {
-                        addressList.remove(address);
+                int index = -1;
+                for(int i = 0; i < addressList.size(); i++) {
+                    if(addressList.get(i).getId().equals(id)) {
+                        index = i;
                     }
-                });
+                }
+
+                if(index != -1) addressList.remove(index);
             }
 
             @Override
