@@ -57,9 +57,11 @@ public class AddressRepository implements AddressPersistenceAdapter {
     @Override
     public void delete(Long addressId) {
         AddressJPA addressJPA = this.addressRepositoryJPA.findOne(addressId);
-        if(addressJPA != null) {
-            this.addressRepositoryJPA.delete(addressJPA);
+        if(addressJPA == null) {
+            throw new IllegalArgumentException("Address does not exist");
         }
+
+        this.addressRepositoryJPA.delete(addressJPA);
     }
 
     @Override

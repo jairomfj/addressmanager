@@ -44,7 +44,7 @@ public class EnderecoController {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/endereco/{enderecoId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/endereco/{enderecoId}", method = RequestMethod.DELETE)
     public ResponseEntity<EnderecoOutput> delete(@PathVariable Long enderecoId) {
 
         ResponseEntity<EnderecoOutput> responseEntity;
@@ -52,7 +52,7 @@ public class EnderecoController {
             addressService.delete(enderecoId);
             responseEntity = new ResponseEntity<>(EnderecoOutput.buildSuccess(), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            responseEntity = new ResponseEntity<>(EnderecoOutput.buildInvalidEndereco(), HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<>(EnderecoOutput.buildEnderecoNotFound(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             LOGGER.error("Error while deleting address: ", e);
